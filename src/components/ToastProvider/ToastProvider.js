@@ -11,6 +11,17 @@ function ToastProvider({children}) {
     setAllToasts([]);
   });
 
+  function createToast(message, variant) {
+    setAllToasts([
+      ...allToasts,
+      {
+        id: crypto.randomUUID(),
+        message,
+        variant,
+      },
+    ]);
+  }
+
   function removeToast(toastId) {
     const updatedToasts = allToasts.filter(({ id }) => id !== toastId);
 
@@ -19,7 +30,7 @@ function ToastProvider({children}) {
 
   const contextValue = {
     allToasts,
-    setAllToasts,
+    createToast,
     removeToast,
   };
 

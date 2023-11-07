@@ -10,7 +10,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 const DEFAULT_VARIANT = VARIANT_OPTIONS[0];
 
 function ToastPlayground() {
-  const {allToasts, setAllToasts} = React.useContext(ToastContext);
+  const { createToast } = React.useContext(ToastContext);
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState(DEFAULT_VARIANT);
 
@@ -25,15 +25,7 @@ function ToastPlayground() {
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    setAllToasts([
-      ...allToasts,
-      {
-        id: crypto.randomUUID(),
-        message,
-        variant,
-      }
-    ]);
-    
+    createToast(message, variant);
     setMessage('');
     setVariant(DEFAULT_VARIANT);
   }
